@@ -1,0 +1,3 @@
+const runtimeApiUrl=typeof window!=='undefined'?`${window.location.protocol}//${window.location.hostname}:3333/api`:'http://localhost:3333/api';
+export const API_URL=(import.meta.env.VITE_API_URL||runtimeApiUrl).replace(/\/$/,'');
+export async function api(path,{token,headers,...options}={}){const response=await fetch(`${API_URL}${path}`,{...options,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{ }),...headers}});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.message||'Não foi possível concluir a operação.');return data;}

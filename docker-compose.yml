@@ -1,0 +1,14 @@
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    ports: ["27017:27017"]
+    volumes: ["nova_mongo:/data/db"]
+  app:
+    build: .
+    restart: unless-stopped
+    ports: ["3333:3333"]
+    env_file: .env
+    depends_on: [mongo]
+volumes:
+  nova_mongo:

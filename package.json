@@ -3,7 +3,40 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "scripts": {"dev":"vite --host 0.0.0.0","build":"vite build","preview":"vite preview --host 0.0.0.0","test":"vitest run"},
-  "dependencies": {"@vitejs/plugin-react":"latest","vite":"latest","typescript":"latest","react":"latest","react-dom":"latest","lucide-react":"latest"},
-  "devDependencies": {"vitest":"latest","jsdom":"latest"}
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 0.0.0.0\" \"node --watch server/index.js\"",
+    "dev:web": "vite --host 0.0.0.0",
+    "dev:api": "node --watch server/index.js",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.8.1",
+    "concurrently": "^9.2.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jose": "^6.1.0",
+    "lucide-react": "latest",
+    "mercadopago": "^3.3.0",
+    "mongoose": "^8.18.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "jsdom": "latest",
+    "supertest": "^7.1.4",
+    "vitest": "latest"
+  }
 }
