@@ -101,6 +101,12 @@ app.get("/api/health", (req, res) =>
       mongoose.connection.readyState === 1 ? "connected" : "disconnected",
   }),
 );
+
+app.get("/api/ready", (req, res) => {
+  // Readiness probe: return 200 only when MongoDB connection is ready
+  if (mongoose.connection.readyState === 1) return res.sendStatus(200);
+  return res.status(503).json({ status: "unready", database: "disconnected" });
+});
 app.post(
   "/api/auth/register",
   asyncRoute(async (req, res) => {
